@@ -1,0 +1,20 @@
+# zammad-cli
+
+> Command-line client for the Zammad helpdesk: list, search, view, and update
+> tickets; send email replies with signatures; manage tags and attachments.
+> Single static Go binary, configured via ~/.config/zammad/config.yml or
+> ZAMMAD_URL/ZAMMAD_TOKEN environment variables.
+
+The CLI is self-documenting for LLMs: run `zammad docs` for the complete
+command reference in one page. Every read command supports `-o json`.
+
+## Docs
+
+- [README](https://github.com/lukeisontheroad/zammad-cli/blob/main/README.md): install, auth, usage
+- [Agent skill](https://github.com/lukeisontheroad/zammad-cli/blob/main/skills/zammad/SKILL.md): drop-in skill for AI agents operating the CLI
+- [CONTRIBUTING](https://github.com/lukeisontheroad/zammad-cli/blob/main/CONTRIBUTING.md): commit convention, release automation
+- [CLAUDE.md](https://github.com/lukeisontheroad/zammad-cli/blob/main/CLAUDE.md): architecture and Zammad API facts for coding agents
+
+## Optional
+
+- [Zammad API docs](https://docs.zammad.org/en/latest/api/intro.html): upstream REST API reference
