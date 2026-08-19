@@ -51,6 +51,9 @@ changelog:
 
 homebrew_casks:
   - name: zammad
+    # No tap token configured -> release still succeeds, just without
+    # pushing the formula. Set the HOMEBREW_TAP_TOKEN repo secret to enable.
+    skip_upload: '{{ if .Env.HOMEBREW_TAP_TOKEN }}false{{ else }}true{{ end }}'
     repository:
       owner: lukeisontheroad
       name: homebrew-tap
