@@ -33,17 +33,23 @@ type Config struct {
 	Instances map[string]Instance `yaml:"instances,omitempty"`
 }
 
-// Path returns the config file location: $ZAMMAD_CONFIG or
-// <os.UserConfigDir>/zammad/config.yml.
+// Path returns the config file location: $ZAMMAD_CONFIG, or
+// $XDG_CONFIG_HOME/zammad/config.yml, defaulting to ~/.config/zammad/config.yml
+// on every platform (like gh/glab; deliberately not os.UserConfigDir, whose
+// macOS result "Library/Application Support" is hostile to terminal use).
 func Path() (string, error) {
 	if p := os.Getenv(EnvConfig); p != "" {
 		return p, nil
 	}
-	dir, err := os.UserConfigDir()
-	if err != nil {
-		return "", err
+	base := os.Getenv("XDG_CONFIG_HOME")
+	if base == "" {
+		home, err := os.UserHomeDir()
+		if err != nil {
+			return "", err
+		}
+		base = filepath.Join(home, ".config")
 	}
-	return filepath.Join(dir, "zammad", "config.yml"), nil
+	return filepath.Join(base, "zammad", "config.yml"), nil
 }
 
 // Load reads the config file. A missing file yields an empty config, not an error.
